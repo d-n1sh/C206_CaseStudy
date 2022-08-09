@@ -6,7 +6,7 @@ public class Cca {
 	private String time;
 	private String venue;
 	private String name;
-
+//
 
 	public Cca(String title, String description, String classSize, String day, String time, String venue, String name) {
 		super();
