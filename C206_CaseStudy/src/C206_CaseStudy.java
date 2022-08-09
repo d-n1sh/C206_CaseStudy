@@ -29,16 +29,37 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == OPTION_STAFF) {
-				// View all cca
-				if (option == OPTION_VIEW) {
-					C206_CaseStudy.viewAllCca(ccaList);
-				}
+					C206_CaseStudy.setHeader("STAFF");				
+					C206_CaseStudy.setHeader("OPTIONS");
+					System.out.println("1. View CCA");
+					System.out.println("2. Add CCA");
+					System.out.println("3. Delete CCA");
+				
+					int optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
 
-			} else if (option == OPTION_ADD) {
+					// View all cca
+					if (optionCCA == OPTION_VIEW) {
+						C206_CaseStudy.viewAllCca(ccaList);
+
+					// Add cca
+					} else if (optionCCA == OPTION_ADD) {
+						Cca add = inputCca();
+						C206_CaseStudy.addCca(ccaList, add);
+						System.out.println("CCA added");
+						
+					} else if (optionCCA == OPTION_DELETE) {
+						String title = Helper.readString("Enter CCA title to delete > ");
+						C206_CaseStudy.deleteCCA(ccaList, title);
+						System.out.println("CCA deleted");
+
+					} else {
+						System.out.println("Invalid option");
+					}
+
+			} else if (option == OPTION_PARENT) {
 				// Add a cca
-				C206_CaseStudy.setHeader("ADD");			
+				C206_CaseStudy.setHeader("PARENTS");			
 				C206_CaseStudy.setHeader("CATEGORY");
-				C206_CaseStudy.setHeader("CCA");
 				System.out.println("1. ");
 				System.out.println("2. ");
 				
@@ -151,80 +172,47 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("CCA LIST");
 		String output = String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n", "ASSET TAG", "DESCRIPTION",
 				"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
-		 output += retrieveAllCamcorder(camcorderList);
+		 output += retrieveAllCca(ccaList);
 		System.out.println(output);
 	}
 
-	public static String retrieveAllChromebook(ArrayList<Chromebook> chromebookList) {
-		String output = "";
-		// write your code here
+	//================================= Option 2 Add CCA (CRUD - Create) =================================
+	public static Cca inputCca() {
+		Cca add = null;
+		
+		String title = Helper.readString("Enter CCA title > ");
+		String description = Helper.readString("Enter CCA description > ");
+		String classSize = Helper.readString("Enter class size > ");
+		String day = Helper.readString("Enter CCA day > ");
+		String time = Helper.readString("Enter CCA time > ");
+		String venue = Helper.readString("Enter CCA venue > ");
+		String name = Helper.readString("Enter teacher-in-charge > ");
 
-		for (int i = 0; i < chromebookList.size(); i++) {
-
-			output += String.format("%-10s %-30s %-10s %-10s %-20s\n", chromebookList.get(i).getAssetTag(),
-					chromebookList.get(i).getDescription(), 
-					ResourceCentre.showAvailability(chromebookList.get(i).getIsAvailable()),
-					chromebookList.get(i).getDueDate(),chromebookList.get(i).getOs());
-		}
-		return output;
-	}
-	public static void viewAllChromebook(ArrayList<Chromebook> chromebookList) {
-		ResourceCentre.setHeader("CHROMEBOOK LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "ASSET TAG", "DESCRIPTION",
-				"AVAILABLE", "DUE DATE","OPERATING SYSTEM");
-		output += retrieveAllChromebook(chromebookList);
-		System.out.println(output);
-	}
-
-	//================================= Option 2 Add an item (CRUD - Create) =================================
-	public static Camcorder inputCamcorder() {
-		String tag = Helper.readString("Enter asset tag > ");
-		String description = Helper.readString("Enter description > ");
-		int zoom = Helper.readInt("Enter optical zoom > ");
-
-		Camcorder cc= new Camcorder(tag, description, zoom);
-		return cc;
+		add = new Cca(title, description, classSize, day, time, venue, name);
+		return add;
 		
 	}
-	public static void addCamcorder(ArrayList<Camcorder> camcorderList, Camcorder cc) {
+	public static void addCca(ArrayList<Cca> ccaList, Cca add) {
 		
-		camcorderList.add(cc);
+		ccaList.add(add);
 		
 	}
 	
-	public static Chromebook inputChromebook() {	
-		Chromebook cb =null;
-		// write your code here
-		String tag = Helper.readString("Enter asset tag > ");
-		String description = Helper.readString("Enter description > ");
-		String os = Helper.readString("Enter operating system > ");
-
-		cb = new Chromebook(tag, description, os);
-		return cb;
+	//================================= Option 3 Delete CCA (CRUD - Update) =================================
+	public static boolean deleteCCA(ArrayList<Cca> ccaList, String title) {
 		
-	}	
-	public static void addChromebook(ArrayList<Chromebook> chromebookList, Chromebook cb) {
-		// write your code here
-		chromebookList.add(cb);
-	}
-	
-	//================================= Option 3 Loan an item (CRUD - Update) =================================
-	public static boolean doLoanCamcorder(ArrayList<Camcorder> camcorderList, String tag, String dueDate) {
-		
-		boolean isLoaned = false;
+		boolean isDeleted = false;
 
-		for (int i = 0; i < camcorderList.size(); i++) {
-			if (tag.equalsIgnoreCase(camcorderList.get(i).getAssetTag())
-					&& camcorderList.get(i).getIsAvailable() == true) {
+		for (int i = 0; i < ccaList.size(); i++) {
+			if (title.equalsIgnoreCase(ccaList.get(i).getTitle())) {
 				
-				camcorderList.get(i).setIsAvailable(false);
-				camcorderList.get(i).setDueDate(dueDate);
+				ccaList.remove(i);
 				
-				isLoaned = true;
+				isDeleted = true;
 				
 			}
 		}
-		return isLoaned;
+		return isDeleted;
 	}
 	public static void loanCamcorder(ArrayList<Camcorder> camcorderList) {
 		ResourceCentre.viewAllCamcorder(camcorderList);
