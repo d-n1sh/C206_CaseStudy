@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 public class C206_CaseStudy {
 
-	private static final int OPTION_STAFF = 2;
-	private static final int OPTION_PARENT = 1;
+	private static final int OPTION_STAFF = 1;
+	private static final int OPTION_PARENT = 2;
 	private static final int OPTION_STUDENT = 3;
 	
 	private static final int OPTION_VIEW = 1;
@@ -13,6 +13,7 @@ public class C206_CaseStudy {
 	
 	public static void main(String[] args) {
 
+		// Done by Danish
 		ArrayList<Cca> ccaList = new ArrayList<Cca>();
 
 		ccaList.add(new Cca("little league soccer","Mini soccer competition!","30","Tuesday","3pm-4pm","Field","Mr Akmal"));
@@ -20,6 +21,13 @@ public class C206_CaseStudy {
 		ccaList.add(new Cca("dig the ground","Finding Diamonds","20","Wednesday","2pm-3pm","Garden","Mr YX"));
 		ccaList.add(new Cca("bakery","Baking your dream cake!","30","Tuesday","4pm-5pm","F&B","Mr Tim"));
 		ccaList.add(new Cca("jewellery making","Create something fancy!","20","Tuesday","2:30pm-3:30pm","Library","Ms Stanley"));
+		
+		
+		// Done by Jia Xin
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		
+		studentList.add(new Student("21024611", "Jia Xin" , "E66K", "Year 2", "Amran", 88746209));
+		
 		
 		int option = 0;
 
@@ -29,238 +37,101 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == OPTION_STAFF) {
-					C206_CaseStudy.setHeader("STAFF");				
-					C206_CaseStudy.setHeader("OPTIONS");
-					System.out.println("1. View CCA");
-					System.out.println("2. Add CCA");
-					System.out.println("3. Delete CCA");
+					String staffUsername = Helper.readString("Enter username > ");
+					String staffPassword = Helper.readString("Enter password > ");
 				
-					int optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+					// LOGIN PAGE TO BE DONE
+					
+						C206_CaseStudy.CCAmenu();
+					
+						int optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+	
+						// View all cca
+						if (optionCCA == OPTION_VIEW) {
+							C206_CaseStudy.viewAllCca(ccaList);
+	
+						// Add cca
+						} else if (optionCCA == OPTION_ADD) {
+							Cca add = inputCca();
+							C206_CaseStudy.addCca(ccaList, add);
+							System.out.println("CCA added");
+							
+						} else if (optionCCA == OPTION_DELETE) {
+							String title = Helper.readString("Enter CCA title to delete > ");
+							C206_CaseStudy.deleteCCA(ccaList, title);
+							System.out.println("CCA deleted");
+	
+						} else {
+							System.out.println("Invalid option");
+						}
 
-					// View all cca
-					if (optionCCA == OPTION_VIEW) {
-						C206_CaseStudy.viewAllCca(ccaList);
+			} else if (option == OPTION_PARENT) {
+					
+				String parentUsername = Helper.readString("Enter username > ");
+				String parentPassword = Helper.readString("Enter password > ");
+			
+				// LOGIN PAGE TO BE DONE
+				
+					C206_CaseStudy.Parentmenu();
+					
+					int optionStudent = Helper.readInt("Enter option to either add/view/delete > ");
 
-					// Add cca
-					} else if (optionCCA == OPTION_ADD) {
-						Cca add = inputCca();
-						C206_CaseStudy.addCca(ccaList, add);
-						System.out.println("CCA added");
-						
-					} else if (optionCCA == OPTION_DELETE) {
-						String title = Helper.readString("Enter CCA title to delete > ");
-						C206_CaseStudy.deleteCCA(ccaList, title);
-						System.out.println("CCA deleted");
+					if (optionStudent == OPTION_ADD) {
+						// Add student
+						Student student = inputStudent();
+						C206_CaseStudy.addStudent(studentList, student);
+						System.out.println("Student added");
+
+					} else if (option == OPTION_VIEW) {
+						// View all items
+						C206_CaseStudy.viewAllStudent(studentList);
+	
+					} else if (option == OPTION_DELETE) {
+						// Delete Student
+						C206_CaseStudy.setHeader("DELETE STUDENT");
 
 					} else {
 						System.out.println("Invalid option");
 					}
-
-			} else if (option == OPTION_PARENT) {
-				// Add a cca
-				C206_CaseStudy.setHeader("PARENTS");			
-				C206_CaseStudy.setHeader("CATEGORY");
-				System.out.println("1. ");
-				System.out.println("2. ");
+			
+			} else if (option == OPTION_STUDENT) {
+			
+				String studentUsername = Helper.readString("Enter username > ");
+				String studentPassword = Helper.readString("Enter password > ");
+			
+				// LOGIN PAGE TO BE DONE
 				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == OPTION_EDIT) {
-					// Edit a cca
-					Cca item = inputCca();
-					ResourceCentre.addCamcorder(camcorderList, cc);
-					System.out.println("Camcorder added");
-
-				} else if (itemType == OPTION_RETURN) {
-					// Add a Chromebook
-					Chromebook cb = inputChromebook();
-					ResourceCentre.addChromebook(chromebookList, cb);
-					System.out.println("Chromebook added");
-
-				} else {
-					System.out.println("Invalid type");
-				}
-
-			} else if (option == 3) {
-				// Loan item
-				ResourceCentre.setHeader("LOAN");			
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
+					C206_CaseStudy.Studentmenu();
 				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == 1) {
-					// Loan camcorder
-					ResourceCentre.loanCamcorder(camcorderList);
-				} else if (itemType == 2) {
-					// Loan Chromebook
-					ResourceCentre.loanChromebook(chromebookList);
-				} else {
-					System.out.println("Invalid type");
-				}
-
-			} else if (option == 4) {
-				// Return item
-				ResourceCentre.setHeader("RETURN");				
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
-				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-				if (itemType == 1) {
-					// Return camcorder
-					ResourceCentre.returnCamcorder(camcorderList);
-				} else if (itemType == 2) {
-					// Return Chromebook
-					ResourceCentre.returnChromebook(chromebookList);
-				} else {
-					System.out.println("Invalid type");
-				}
-
-			} else if (option == OPTION_QUIT) {
-				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
 			}
 
 		}
-=======
->>>>>>> branch 'master' of https://github.com/d-n1sh/C206_CaseStudy.git
+		System.out.println("Bye!");
 
-		ArrayList<Student> studentList = new ArrayList<Student>();
-		
-		studentList.add(new Student("21024611", "Jia Xin" , "E66K", "Year 2", "Amran", 88746209));
-		
-		int option = 0;
-
-		while (option != 4) {
-
-			C206_CaseStudy.menu();
-			option = Helper.readInt("Enter an option > ");
-
-			if (option == 1) {
-				// Add a new item
-				C206_CaseStudy.setHeader("ADD");			
-				C206_CaseStudy.setHeader("ITEM TYPES");
-				System.out.println("1. Student");
-				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == 1) {
-					// Add student
-					Student student = inputStudent();
-					C206_CaseStudy.addStudent(studentList, student);
-					System.out.println("Student added");
-
-				} else {
-					System.out.println("Student does not exist / Invalid input");
-				}
-
-			} else if (option == 2) {
-				// View all items
-				C206_CaseStudy.viewAllStudent(studentList);
-
-			} else if (option == 3) {
-				// Delete Student
-				C206_CaseStudy.setHeader("DELETE STUDENT");			
-				C206_CaseStudy.setHeader("ITEM TYPES");
-				System.out.println("1. STUDENT");
-				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == 1) {
-					// Delete Student
-					//C206_CaseStudy.deleteStudent(studentList);
-				} else {
-					System.out.println("Invalid type");
-				}
-
-			} else if (option == 4) {
-				System.out.println("Bye!");
-				
-			} else {
-				System.out.println("Invalid option");
-			}
-		}
-
-		}
-		public static void menu() {
-			C206_CaseStudy.setHeader("CCA Registration");
-			System.out.println("1. Add Student");
-			System.out.println("2. View Student");
-			System.out.println("3. Delete Student");
-			System.out.println("4. Quit");
-			Helper.line(80, "-");
-
-		}
-		
-		public static void setHeader(String header) {
-			Helper.line(80, "-");
-			System.out.println(header);
-			Helper.line(80, "-");
-		}
-
-		//================================= Option 1 Add Student (CRUD - Create) =================================
-		public static Student inputStudent() {
-			String studentID = Helper.readString("Enter your student ID > ");
-			String studentName = Helper.readString("Enter student Name > ");
-			String studentClass =  Helper.readString("Enter student class > ");
-			String studentGrade = Helper.readString("Enter student grade > ");
-			String classTeacher = Helper.readString("Enter classroom teacher > ");
-			int contactNo = Helper.readInt("Enter your contact number > ");
-
-			Student student= new Student(studentID, studentName, studentClass, studentGrade, classTeacher, contactNo);
-			return student;
-			
-		}
-		public static void addStudent(ArrayList<Student> studentList, Student student) {
-			
-			studentList.add(student);
-			
-		}
-		
-		//================================= Option 2 View Students (CRUD- Read) =================================
-		public static String retrieveAllStudent(ArrayList<Student> studentList) {
-			String output = "";
-
-			for (int i = 0; i < studentList.size(); i++) {
-
-				output += String.format("%-10s %-30s %-10s %-10s %-20d\n", studentList.get(i).getStudentID(),
-						studentList.get(i).getStudentName(), 
-						studentList.get(i).getStudentClass(), 
-						studentList.get(i).getStudentGrade(), 
-						studentList.get(i).getClassTeacher(), 
-						studentList.get(i).getContactNo());
-			}
-			return output;
-		}
-		
-		public static void viewAllStudent(ArrayList<Student> studentList) {
-			C206_CaseStudy.setHeader("STUDENT LIST");
-			String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "student ID", "student Name", "student Class", "student Grade", "class Teacher", "contact Number");
-			output += retrieveAllStudent(studentList);	
-			System.out.println(output);
-		}
-
-		
-	
-	public static void deleteStudent(ArrayList<Student> studentList, Student student) {
-		
-		studentList.remove(student);
-		
 	}
-<<<<<<< HEAD
+
 
 	public static void menu() {
-		C206_CaseStudy.setHeader("CCA REGISTRATION APP");
-		System.out.println("1. Display Inventory");
-		System.out.println("2. Add item");
-		System.out.println("3. Loan item");
-		System.out.println("4. Return item");
+		C206_CaseStudy.setHeader("CCA REGISTRATION");				
+		C206_CaseStudy.setHeader("OPTIONS");
+		System.out.println("1. View CCA");
+		System.out.println("2. Add CCA");
+		System.out.println("3. Delete CCA");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
-
+	}
+	
+	public static void CCAmenu() {
+		C206_CaseStudy.setHeader("CCA REGISTRATION");
+		C206_CaseStudy.setHeader("STAFF");				
+		C206_CaseStudy.setHeader("OPTIONS");
+		System.out.println("1. View CCA");
+		System.out.println("2. Add CCA");
+		System.out.println("3. Delete CCA");
+		System.out.println("5. Quit");
+		Helper.line(80, "-");
 	}
 	
 	public static void setHeader(String header) {
@@ -269,33 +140,30 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	public static String showAvailability(boolean isAvailable) {
-		String avail;
-
-		if (isAvailable == true) {
-			avail = "Yes";
-		} else {
-			avail = "No";
-		}
-		return avail;
-	}
-
+// DONE BY DANISH
 	//================================= Option 1 View CCA (CRUD- Read) =================================
 	public static String retrieveAllCca(ArrayList<Cca> ccaList) {
 		String output = "";
 
 		for (int i = 0; i < ccaList.size(); i++) {
 
-			output += String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n", ccaList.get(i).getTitle(),
-					ccaList.get(i).getDescription(),ccaList.get(i).getClassSize(),
-					ccaList.get(i).getDay(),ccaList.get(i).getTime(),ccaList.get(i).getVenue(),ccaList.get(i).getName());
+			output += String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n",
+					ccaList.get(i).getTitle(),
+					ccaList.get(i).getDescription(),
+					ccaList.get(i).getClassSize(),
+					ccaList.get(i).getDay(),
+					ccaList.get(i).getTime(),
+					ccaList.get(i).getVenue(),
+					ccaList.get(i).getName());
 		}
 		return output;
 	}
 	public static void viewAllCca(ArrayList<Cca> ccaList) {
 		C206_CaseStudy.setHeader("CCA LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n", "ASSET TAG", "DESCRIPTION",
-				"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
+		String output = String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n",
+				"Title", "Description",
+				"Class Size", "Day","Time",
+				"Venue","Teacher-In-Charge");
 		 output += retrieveAllCca(ccaList);
 		System.out.println(output);
 	}
@@ -311,7 +179,7 @@ public class C206_CaseStudy {
 		String time = Helper.readString("Enter CCA time > ");
 		String venue = Helper.readString("Enter CCA venue > ");
 		String name = Helper.readString("Enter teacher-in-charge > ");
-
+		
 		add = new Cca(title, description, classSize, day, time, venue, name);
 		return add;
 		
@@ -338,108 +206,68 @@ public class C206_CaseStudy {
 		}
 		return isDeleted;
 	}
-	public static void loanCamcorder(ArrayList<Camcorder> camcorderList) {
-		ResourceCentre.viewAllCamcorder(camcorderList);
-		String tag = Helper.readString("Enter asset tag > ");
-		String due = Helper.readString("Enter due date > ");
-		Boolean isLoaned =doLoanCamcorder(camcorderList, tag, due);
-		if (isLoaned == false) {
-			System.out.println("Invalid asset tag");
-		} else {
-			System.out.println("Camcorder " + tag + " loaned out");
-		}
-	}
 	
-	public static boolean doLoanChromebook(ArrayList<Chromebook> chromebookList, String tag, String dueDate) {
-		// write your code here
-		boolean isLoaned = false;
+	
+//DONE BY JIA XIN
+	public static void Studentmenu() {
+		C206_CaseStudy.setHeader("CCA REGISTRATION");
+		C206_CaseStudy.setHeader("STUDENT");			
+		C206_CaseStudy.setHeader("OPTIONS");
+		System.out.println("1. Add Student");
+		System.out.println("2. View Student");
+		System.out.println("3. Delete Student");
+		System.out.println("5. Quit");
+		Helper.line(80, "-");
 
-		for (int i = 0; i < chromebookList.size(); i++) {
-			if (tag.equalsIgnoreCase(chromebookList.get(i).getAssetTag())
-					&& chromebookList.get(i).getIsAvailable() == true) {
-				
-				chromebookList.get(i).setIsAvailable(false);
-				chromebookList.get(i).setDueDate(dueDate);
-				
-				isLoaned = true;
-				
-			}
-		}
-		return isLoaned;
 	}
-	public static void loanChromebook(ArrayList<Chromebook> chromebookList) {
-		// write your code here
-		ResourceCentre.viewAllChromebook(chromebookList);
-		String tag = Helper.readString("Enter asset tag > ");
-		String due = Helper.readString("Enter due date > ");
-		Boolean isLoaned = doLoanChromebook(chromebookList, tag, due);
-		if (isLoaned == false) {
-			System.out.println("Invalid asset tag");
-		} else {
-			System.out.println("Chromebook " + tag + " loaned out");
-		}
+
+	//================================= Option 1 Add Student (CRUD - Create) =================================
+	public static Student inputStudent() {
+		String studentID = Helper.readString("Enter your student ID > ");
+		String studentName = Helper.readString("Enter student Name > ");
+		String studentClass =  Helper.readString("Enter student class > ");
+		String studentGrade = Helper.readString("Enter student grade > ");
+		String classTeacher = Helper.readString("Enter classroom teacher > ");
+		int contactNo = Helper.readInt("Enter your contact number > ");
+
+		Student student = new Student(studentID, studentName, studentClass, studentGrade, classTeacher, contactNo);
+		return student;
+		
+	}
+	public static void addStudent(ArrayList<Student> studentList, Student student) {
+		
+		studentList.add(student);
 		
 	}
 	
-	//================================= Option 4 Return an item (CRUD - Update)=================================
-	public static boolean doReturnCamcorder(ArrayList<Camcorder> camcorderList,String tag) {
-		boolean isReturned = false;
+	//================================= Option 2 View Students (CRUD - Read) =================================
+	public static String retrieveAllStudent(ArrayList<Student> studentList) {
+		String output = "";
 
-		for (int i = 0; i < camcorderList.size(); i++) {
-			String assetTag = camcorderList.get(i).getAssetTag();
-			if (tag.equalsIgnoreCase(assetTag)
-					&& camcorderList.get(i).getIsAvailable() == false) {
-				camcorderList.get(i).setIsAvailable(true);
-				camcorderList.get(i).setDueDate("");
-				isReturned = true;
-				
-			}
-		}
-		return isReturned;
-		
-	}
-	public static void returnCamcorder(ArrayList<Camcorder> camcorderList) {
-		ResourceCentre.viewAllCamcorder(camcorderList);
-		String tag = Helper.readString("Enter asset tag > ");
-		Boolean isReturned = doReturnCamcorder(camcorderList, tag);
-		
-		if (isReturned == false) {
-			System.out.println("Invalid asset tag");
-		} else {
-			System.out.println("Camcorder " + tag + " returned");
-		}
-	}
+		for (int i = 0; i < studentList.size(); i++) {
 
-	public static boolean doReturnChromebook(ArrayList<Chromebook> chromebookList,String tag){
-		boolean isReturned = false;
-		// write your code here
-		for (int i = 0; i < chromebookList.size(); i++) {
-			String assetTag = chromebookList.get(i).getAssetTag();
-			if (tag.equalsIgnoreCase(assetTag)
-					&& chromebookList.get(i).getIsAvailable() == false) {
-				chromebookList.get(i).setIsAvailable(true);
-				chromebookList.get(i).setDueDate("");
-				isReturned = true;
-				
-			}
+			output += String.format("%-10s %-30s %-10s %-10s %-20d\n", studentList.get(i).getStudentID(),
+					studentList.get(i).getStudentName(), 
+					studentList.get(i).getStudentClass(), 
+					studentList.get(i).getStudentGrade(), 
+					studentList.get(i).getClassTeacher(), 
+					studentList.get(i).getContactNo());
 		}
-		return isReturned;
-		
+		return output;
 	}
-	public static void returnChromebook(ArrayList<Chromebook> chromebookList) {
-		// write your code here
-		ResourceCentre.viewAllChromebook(chromebookList);
-		String tag = Helper.readString("Enter asset tag > ");
-		Boolean isReturned = doReturnChromebook(chromebookList, tag);
-		
-		if (isReturned == false) {
-			System.out.println("Invalid asset tag");
-		} else {
-			System.out.println("Chromebook" + tag + " returned");
-		}
+	
+	public static void viewAllStudent(ArrayList<Student> studentList) {
+		C206_CaseStudy.setHeader("STUDENT LIST");
+		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "student ID", "student Name", "student Class", "student Grade", "class Teacher", "contact Number");
+		output += retrieveAllStudent(studentList);	
+		System.out.println(output);
 	}
-
+	
+	//================================= Option 3 Delete Students (CRUD - Update) =================================
+	public static void deleteStudent(ArrayList<Student> studentList, Student student) {
+	
+		studentList.remove(student);
+	
+	}
+	
 }
-=======
-	}
->>>>>>> branch 'master' of https://github.com/d-n1sh/C206_CaseStudy.git
