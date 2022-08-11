@@ -33,8 +33,6 @@ public class C206_CaseStudy {
 		C206_CaseStudy.menu();
 		option = Helper.readInt("Enter an option > ");
 
-		while (option != OPTION_QUIT) {
-
 
 			if (option == OPTION_STAFF) {
 					String staffUsername = Helper.readString("Enter username > ");
@@ -87,6 +85,7 @@ public class C206_CaseStudy {
 			
 				// LOGIN PAGE TO BE DONE
 			
+			// Done By Jia Xin
 			} else if (option == OPTION_STUDENT) {
 			
 				String studentUsername = Helper.readString("Enter username > ");
@@ -109,7 +108,7 @@ public class C206_CaseStudy {
 							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
 							
 						} else if (optionStudent == OPTION_VIEW) {
-							// View all items
+							// View all Student
 							C206_CaseStudy.viewAllStudent(studentList);
 							System.out.println("");
 							C206_CaseStudy.Studentmenu();
@@ -123,21 +122,22 @@ public class C206_CaseStudy {
 							C206_CaseStudy.Studentmenu();
 							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
 							
+						}else if (optionStudent == OPTION_QUIT){
+							System.out.println("Bye " + studentUsername + "\n");
+							C206_CaseStudy.menu();
+					
+							
 						} else {
 							System.out.println("Invalid option\n");
 							C206_CaseStudy.Studentmenu();
 							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
 						}
-						System.out.println("Bye " + studentUsername + "\n");
-						C206_CaseStudy.menu();
-						option = Helper.readInt("Enter an option > ");
-					}
+						
 					
-			} else {
-				System.out.println("Invalid option");
+					}
 			}
 
-		}
+		
 		System.out.println("Bye!");
 
 	}
@@ -243,8 +243,8 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("CCA REGISTRATION");
 		C206_CaseStudy.setHeader("STUDENT");			
 		C206_CaseStudy.setHeader("OPTIONS");
-		System.out.println("1. Add Student");
-		System.out.println("2. View Student");
+		System.out.println("1. View Student");
+		System.out.println("2. Add Student");
 		System.out.println("3. Delete Student");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
@@ -276,7 +276,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < studentList.size(); i++) {
 
-			output += String.format("%-10s %-30s %-10s %-10s %-20d\n", studentList.get(i).getStudentID(),
+			output += String.format("%-15s %-15s %-15s %-15s %-15s %-10d\n", studentList.get(i).getStudentID(),
 					studentList.get(i).getStudentName(), 
 					studentList.get(i).getStudentClass(), 
 					studentList.get(i).getStudentGrade(), 
@@ -288,7 +288,7 @@ public class C206_CaseStudy {
 	
 	public static void viewAllStudent(ArrayList<Student> studentList) {
 		C206_CaseStudy.setHeader("STUDENT LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "student ID", "student Name", "student Class", "student Grade", "class Teacher", "contact Number");
+		String output = String.format("%-15s %-15s %-15s %-15s %-15s %-15s\n", "student ID", "student Name", "student Class", "student Grade", "class Teacher", "contact Number");
 		output += retrieveAllStudent(studentList);	
 		System.out.println(output);
 	}
