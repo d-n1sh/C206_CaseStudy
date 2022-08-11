@@ -71,8 +71,15 @@ public class C206_CaseStudy {
 				String parentPassword = Helper.readString("Enter password > ");
 			
 				// LOGIN PAGE TO BE DONE
+			
+			} else if (option == OPTION_STUDENT) {
+			
+				String studentUsername = Helper.readString("Enter username > ");
+				String studentPassword = Helper.readString("Enter password > ");
+			
+				// LOGIN PAGE TO BE DONE
 				
-					C206_CaseStudy.Parentmenu();
+					C206_CaseStudy.Studentmenu();
 					
 					int optionStudent = Helper.readInt("Enter option to either add/view/delete > ");
 
@@ -93,15 +100,6 @@ public class C206_CaseStudy {
 					} else {
 						System.out.println("Invalid option");
 					}
-			
-			} else if (option == OPTION_STUDENT) {
-			
-				String studentUsername = Helper.readString("Enter username > ");
-				String studentPassword = Helper.readString("Enter password > ");
-			
-				// LOGIN PAGE TO BE DONE
-				
-					C206_CaseStudy.Studentmenu();
 				
 			} else {
 				System.out.println("Invalid option");
@@ -264,9 +262,20 @@ public class C206_CaseStudy {
 	}
 	
 	//================================= Option 3 Delete Students (CRUD - Update) =================================
-	public static void deleteStudent(ArrayList<Student> studentList, Student student) {
-	
-		studentList.remove(student);
+	public static boolean deleteStudent(ArrayList<Student> studentList, String student) {
+		
+		boolean isDeleted = false;
+		
+		for (int i = 0; i < studentList.size(); i++) {
+			if (student.equalsIgnoreCase(studentList.get(i).getStudentName())) {
+				
+				studentList.remove(i);
+				
+				isDeleted = true;
+				
+			}
+		}
+		return isDeleted;
 	
 	}
 	
