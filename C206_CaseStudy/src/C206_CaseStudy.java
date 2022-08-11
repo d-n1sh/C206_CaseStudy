@@ -30,11 +30,11 @@ public class C206_CaseStudy {
 		
 		
 		int option = 0;
+		C206_CaseStudy.menu();
+		option = Helper.readInt("Enter an option > ");
 
 		while (option != OPTION_QUIT) {
 
-			C206_CaseStudy.menu();
-			option = Helper.readInt("Enter an option > ");
 
 			if (option == OPTION_STAFF) {
 					String staffUsername = Helper.readString("Enter username > ");
@@ -46,24 +46,39 @@ public class C206_CaseStudy {
 					
 						int optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
 	
-						// View all cca
-						if (optionCCA == OPTION_VIEW) {
-							C206_CaseStudy.viewAllCca(ccaList);
-	
-						// Add cca
-						} else if (optionCCA == OPTION_ADD) {
-							Cca add = inputCca();
-							C206_CaseStudy.addCca(ccaList, add);
-							System.out.println("CCA added");
-							
-						} else if (optionCCA == OPTION_DELETE) {
-							String title = Helper.readString("Enter CCA title to delete > ");
-							C206_CaseStudy.deleteCCA(ccaList, title);
-							System.out.println("CCA deleted");
-	
-						} else {
-							System.out.println("Invalid option");
+						while (optionCCA != OPTION_QUIT) {
+							// View all cca
+							if (optionCCA == OPTION_VIEW) {
+								C206_CaseStudy.viewAllCca(ccaList);
+								System.out.println("");
+								C206_CaseStudy.CCAmenu();
+								optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+		
+							// Add cca
+							} else if (optionCCA == OPTION_ADD) {
+								Cca add = inputCca();
+								C206_CaseStudy.addCca(ccaList, add);
+								System.out.println("CCA added\n");
+								C206_CaseStudy.CCAmenu();
+								optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+								
+							} else if (optionCCA == OPTION_DELETE) {
+								String title = Helper.readString("Enter CCA title to delete > ");
+								C206_CaseStudy.deleteCCA(ccaList, title);
+								System.out.println("CCA deleted\n");
+								C206_CaseStudy.CCAmenu();
+								optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+								
+							} else {
+								System.out.println("Invalid option\n");
+								C206_CaseStudy.CCAmenu();
+								optionCCA = Helper.readInt("Enter option to either view/add/delete > ");
+							}
+						
 						}
+						System.out.println("Bye " + staffUsername + "\n");
+						C206_CaseStudy.menu();
+						option = Helper.readInt("Enter an option > ");
 
 			} else if (option == OPTION_PARENT) {
 					
@@ -78,29 +93,46 @@ public class C206_CaseStudy {
 				String studentPassword = Helper.readString("Enter password > ");
 			
 				// LOGIN PAGE TO BE DONE
-				
+
 					C206_CaseStudy.Studentmenu();
 					
-					int optionStudent = Helper.readInt("Enter option to either add/view/delete > ");
-
-					if (optionStudent == OPTION_ADD) {
-						// Add student
-						Student student = inputStudent();
-						C206_CaseStudy.addStudent(studentList, student);
-						System.out.println("Student added");
-
-					} else if (option == OPTION_VIEW) {
-						// View all items
-						C206_CaseStudy.viewAllStudent(studentList);
-	
-					} else if (option == OPTION_DELETE) {
-						// Delete Student
-						C206_CaseStudy.setHeader("DELETE STUDENT");
-
-					} else {
-						System.out.println("Invalid option");
+					int optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
+					
+					while (optionStudent != OPTION_QUIT) {					
+					
+						if (optionStudent == OPTION_ADD) {
+							// Add student
+							Student student = inputStudent();
+							C206_CaseStudy.addStudent(studentList, student);
+							System.out.println("Student added\n");
+							C206_CaseStudy.Studentmenu();
+							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
+							
+						} else if (optionStudent == OPTION_VIEW) {
+							// View all items
+							C206_CaseStudy.viewAllStudent(studentList);
+							System.out.println("");
+							C206_CaseStudy.Studentmenu();
+							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
+		
+						} else if (optionStudent == OPTION_DELETE) {
+							// Delete Student
+							String name = Helper.readString("Enter student name to delete > ");
+							C206_CaseStudy.deleteStudent(studentList, name);
+							System.out.println("Student deleted\n");
+							C206_CaseStudy.Studentmenu();
+							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
+							
+						} else {
+							System.out.println("Invalid option\n");
+							C206_CaseStudy.Studentmenu();
+							optionStudent = Helper.readInt("Enter option to either view/add/delete > ");
+						}
+						System.out.println("Bye " + studentUsername + "\n");
+						C206_CaseStudy.menu();
+						option = Helper.readInt("Enter an option > ");
 					}
-				
+					
 			} else {
 				System.out.println("Invalid option");
 			}
@@ -114,9 +146,9 @@ public class C206_CaseStudy {
 	public static void menu() {
 		C206_CaseStudy.setHeader("CCA REGISTRATION");				
 		C206_CaseStudy.setHeader("OPTIONS");
-		System.out.println("1. View CCA");
-		System.out.println("2. Add CCA");
-		System.out.println("3. Delete CCA");
+		System.out.println("1. Staff");
+		System.out.println("2. Parent");
+		System.out.println("3. Student");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
@@ -145,7 +177,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < ccaList.size(); i++) {
 
-			output += String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n",
+			output += String.format("%-30s %-40s %-20s %-20s %-20s %-20s %-20s\n",
 					ccaList.get(i).getTitle(),
 					ccaList.get(i).getDescription(),
 					ccaList.get(i).getClassSize(),
@@ -158,7 +190,7 @@ public class C206_CaseStudy {
 	}
 	public static void viewAllCca(ArrayList<Cca> ccaList) {
 		C206_CaseStudy.setHeader("CCA LIST");
-		String output = String.format("%-10s %-30s %-10s %-10s %-10s %-10s %-10s\n",
+		String output = String.format("%-30s %-40s %-20s %-20s %-20s %-20s %-20s\n",
 				"Title", "Description",
 				"Class Size", "Day","Time",
 				"Venue","Teacher-In-Charge");
