@@ -18,5 +18,4 @@ public class Parents {
 		this.id = id;
 	}
 	
-	
 }
