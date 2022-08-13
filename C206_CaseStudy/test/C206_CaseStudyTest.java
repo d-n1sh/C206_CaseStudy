@@ -30,7 +30,10 @@ public class C206_CaseStudyTest {
 		//Categories
 		private Categories c1;
 		private Categories c2;
-	
+		c1 = new Categories("Sports");
+	    c2 = new Categories("UG");
+	    private ArrayList<Categories>categoryList= new ArrayList<Categories>();
+		
 		//student
 		private ArrayList<Student> studentList = new ArrayList<Student>();
 		
@@ -238,6 +241,65 @@ public void setUp() throws Exception {
 			assertEquals("Test that user arraylist size is 1 after deleting", 1, ccaList.size());
 		}
 	 
+	 //Timothy
+	 @Test
+	  public void testAddCategory() {
+	    // Item list is not null, so that can add a new item
+	    assertNotNull("Test if there is valid Category arraylist to add to", categoryList);
+	    
+	    //Given an empty list, after adding 1 item, the size of the list is 1
+	    C206_CaseStudy.addCategories(categoryList, c1);    
+	    assertEquals("Test if that Category arraylist size is 1?", 1, categoryList.size());
+	    
+	    //The item just added is as same as the first item of the list
+	    assertSame("Test that Category is added same as 1st item of the list?", c1, categoryList.get(0));
+	    
+	    //Add another item. test The size of the list is 2?
+	    C206_CaseStudyTest.addCategories(categoryList, c2);
+	    assertEquals("Test that category arraylist size is 2?", 2, categoryList.size());
+	  }
+	  
+	  @Test
+	  public void testRetrieveAllCategories() {
+	    // Test if Item list is not null but empty, so that can add a new item
+	    assertNotNull("Test if there is valid category arraylist to add to", categoryList);
+	    
+	    //test if the list of categories retrieved from the SourceCentre is empty
+	    String allcategory= C206_CaseStudyTest.retrieveAllcategory(categoryList);
+	    String testOutput = "";
+	    assertEquals("Check that ViewAllcategorylist", testOutput, allcategory);
+	        
+	    //Given an empty list, after adding 2 items, test if the size of the list is 2
+	    C206_CaseStudyTest.addcategory(categoryList, c1);
+	    C206_CaseStudyTest.addcategory(categoryList, c2);
+	    assertEquals("Test if that category arraylist size is 2?", 2, categoryList.size());
+	    
+	    //test if the expected output string same as the list of categories retrieved from the SourceCentre
+	    allcategory= C206_CaseStudyTest.retrieveAllcategory(categoryList);
+
+	    testOutput = String.format("%-10s\n", "Sports");
+	    testOutput += String.format("%-10s", "UG");
+	  
+	    assertEquals("Check that ViewAllcategorylist", testOutput, allcategory);
+	    
+	  }
+	  
+	  @Test
+	    public void testRemovecategory(){
+	         //One category added, one removed
+	   C206_CaseStudy.addcategory(categoryList, c1);
+	   assertEquals("Test if that category arraylist size is 1?", 1, categoryList.size());
+	   C206_CaseStudy.deleteAllcategory(categoryList);
+	   assertEquals(0, categoryList.size());
+
+	         boolean exists = false;
+	         for (int i = 0; i < categoryList.size(); i++) {
+	              if (categoryList.get(i).equals(c1))
+	                   exists = true;
+	         }
+	         assertFalse(exists);
+	 }
+	 
 	 @After
 	 public void tearDown() throws Exception {
 	 
@@ -254,5 +316,5 @@ public void setUp() throws Exception {
 	 s1 = null;
 	 studentList = null;
 	 }
- 
+ 	  
 }
