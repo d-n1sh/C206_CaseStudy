@@ -366,7 +366,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("OPTIONS");
 		System.out.println("1. View parent account");
 		System.out.println("2. Add parent account");
-		System.out.println("3. Delete parent accout");
+		System.out.println("3. Delete parent account");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
 
@@ -526,3 +526,60 @@ public class C206_CaseStudy {
 // }
 // }
 //
+
+//Done by Akmal
+public static void studentCCAmenu() {
+	String studentID = Helper.readString("Enter student ID > ");
+	String regID = Helper.readString("Enter registration ID > ");
+	
+		
+		C206_CaseStudy.setHeader("CCA REGISTRATION");
+		C206_CaseStudy.setHeader("PARENTS");			
+		C206_CaseStudy.setHeader("OPTIONS");
+		System.out.println("1. Add student for CCA");
+		System.out.println("2. View students registered for a CCA");
+		Helper.line(80, "-");
+}
+		//option 1
+		public static RegisterCCA input() {
+			String studentID = Helper.readString("Enter your student ID > ");
+			String studentName = Helper.readString("Enter student Name > ");
+			String ccaName = Helper.readString("Enter CCA > ");
+
+			RegisterCCA ccaRegister = new RegisterCCA(studentID, studentName,ccaName);
+			return ccaRegister;
+			
+		}
+		public static void StudentCCA(ArrayList<RegisterCCA> studentCCAList, RegisterCCA ccaRegister) {
+			studentCCAList.add(ccaRegister);
+		}
+		//option 2
+		public static String retrieveStudentCCA(ArrayList<RegisterCCA> studentCCAList) {
+			String output = "";
+
+			String studentid = Helper.readString("Enter student ID > ");
+			String regid = Helper.readString("Enter registration ID > ");
+			
+			for (int i = 0; i < studentCCAList.size(); i++) {
+				
+				output += String.format("%-20s %-20s %-20s\n",
+						studentCCAList.get(i).getStudentID(),
+						studentCCAList.get(i).getStudentName(),
+						studentCCAList.get(i).getCcaName());
+				}
+			return output;
+			}
+			
+		public static void viewStudentCCAList(ArrayList<RegisterCCA> studentCCAList) {
+			C206_CaseStudy.setHeader("Students Registered for CCA");
+			String output = String.format("%-20s %-20s %-20s\n",
+					"Student ID", "Student's Name",
+					"CCA");
+			 output += retrieveStudentCCA(studentCCAList);
+			System.out.println(output);
+		}
+	
+	
+}
+
+
