@@ -5,6 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+	
+	private Cca cc1;
+	private Cca cc2;
+	private Cca cc3;
+	private Cca cb1;
+	private Cca cb2;
+	private Cca cb3;
 
 	@Before
 	public void setUp() throws Exception {

@@ -419,7 +419,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-	//================================= Option 3 Delete Students (CRUD - Update) =================================
+	//================================= Option 3 Delete Parents (CRUD - Update) =================================
 		public static boolean deleteParent(ArrayList<Parents> parentList, String studentid) {
 			
 			boolean isDeleted = false;
