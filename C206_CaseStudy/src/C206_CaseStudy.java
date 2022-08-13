@@ -26,7 +26,7 @@ public class C206_CaseStudy {
 		// Done by Jia Xin
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		
-		studentList.add(new Student("21024611", "Jia Xin" , "E66K", "Year 2", "Amran", 88746209));
+		studentList.add(new Student("21024611", "Jia Xin" , "E66K", "Year 2", "Amran", 91234567));
 		
 		
 		int option = 0;
