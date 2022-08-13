@@ -1,94 +1,7 @@
 import java.util.ArrayList;
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/d-n1sh/C206_CaseStudy.git
-public class C206_CaseStudy {
-	public static void Categorymenu() {
-	       C206_CaseStudy.setHeader("Maintaining parent accounts");
-	       System.out.println("1. Add Parent");
-	       System.out.println("2. View Parent");
-	       System.out.println("3. Delete Parent");
-	       System.out.println("4. Quit");
-	       Helper.line(80, "-");
-	     }
-	  //add categories account
-	  public static Categories inputCategories() {
-	   
-	      String catName = Helper.readString("Enter category name > ");
-
-
-	      Categories Category = new Categories(catName);
-	      return Category;
-	       
-	     }
-	  public static void addParent(ArrayList<Categories> categoryList, Categories Category) {
-	       
-	       categoryList.add(Category);
-	     }
-	  //view categories account
-	  public static String retrieveAllCategories(ArrayList<Categories> categoryList) {
-	   String output = "";
-	   for (int i = 0; i < categoryList.size(); i++) {
-
-	          output += String.format("%-15s \n",
-	           
-	           categoryList.get(i).getCatName());
-
-	        }
-	        return output;
-	      }
-	  public static void viewAllCategory(ArrayList<Categories> categoryList) {
-	       C206_CaseStudy.setHeader("CATEGORY LIST");
-	       String output = String.format("%-15s \n");
-	       output += retrieveAllCategories(categoryList);
-	       System.out.println(output);
-	     }
-	  
-	  public static void deleteAllCategory(ArrayList<Categories> categoryList) {
-	   String output = String.format("%-15s \n");
-	   output += retrieveAllCategories(categoryList);
-	      System.out.println(output);
-	  }
-	//Manage categories accounts (add,view,delete)
-	  ArrayList<Categories> categoryList = new ArrayList<Categories>();
-	  int option = 0;
-
-	     while (option != 4) {
-
-	       C206_CaseStudy.Categorymenu();
-	       option = Helper.readInt("Enter an option > ");
-
-	       if (option == 1) {
-	         // Add a new item
-	         C206_CaseStudy.setHeader("ADD");
-	           // Add student
-	           Categories category = inputCategories();
-	           C206_CaseStudy.addParent(categoryList, category);
-	           System.out.println("Category added");
-	        
-
-	       } else if (option == 2) {
-	         // View all categories
-	         C206_CaseStudy.viewAllCategory(categoryList);
-
-	       } else if (option == 3) {
-	         // Delete category
-	         C206_CaseStudy.setHeader("DELETE");      
-	         // Delete category
-	         C206_CaseStudy.deleteAllCategory(categoryList);
-
-	       } else if (option == 4) {
-	         System.out.println("Bye!");
-	         
-	       } else {
-	         System.out.println("Invalid option");
-	       }
-	     }
-	  //
-
-=======
 
 public class C206_CaseStudy {
->>>>>>> branch 'master' of https://github.com/d-n1sh/C206_CaseStudy
+
 
 	private static final int OPTION_STAFF = 1;
 	private static final int OPTION_PARENT = 2;
@@ -99,6 +12,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_DELETE = 3;
 	
 	private static final int OPTION_QUIT = 5;
+
 	
 	public static void main(String[] args) {
 
@@ -507,7 +421,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-	//================================= Option 3 Delete Students (CRUD - Update) =================================
+	//================================= Option 3 Delete Parents (CRUD - Update) =================================
 		public static boolean deleteParent(ArrayList<Parents> parentList, String studentid) {
 			
 			boolean isDeleted = false;
@@ -526,3 +440,90 @@ public class C206_CaseStudy {
 		}
 	
 }
+
+
+////DONE BY TIMOTHY
+//public static void Categorymenu() {
+//    C206_CaseStudy.setHeader("Maintaining parent accounts");
+//    System.out.println("1. Add Categories");
+//    System.out.println("2. View Categories");
+//    System.out.println("3. Delete Categories");
+//    System.out.println("4. Quit");
+//    Helper.line(80, "-");
+//  }
+////add categories account
+//public static Categories inputCategories() {
+//
+//   String catName = Helper.readString("Enter category name > ");
+//
+//
+//   Categories Category = new Categories(catName);
+//   return Category;
+//    
+//  }
+//public static void addCategory(ArrayList<Categories> categoryList, Categories Category) {
+//    
+//    categoryList.add(Category);
+//  }
+////view categories account
+//public static String retrieveAllCategories(ArrayList<Categories> categoryList) {
+//String output = "";
+//for (int i = 0; i < categoryList.size(); i++) {
+//
+//       output += String.format("%-15s \n",
+//        
+//        categoryList.get(i).getCatName());
+//
+//     }
+//     return output;
+//   }
+//public static void viewAllCategory(ArrayList<Categories> categoryList) {
+//    C206_CaseStudy.setHeader("CATEGORY LIST");
+//    String output = String.format("%-15s \n");
+//    output += retrieveAllCategories(categoryList);
+//    System.out.println(output);
+//  }
+//
+//public static void deleteAllCategory(ArrayList<Categories> categoryList) {
+//String output = String.format("%-15s \n");
+//output += retrieveAllCategories(categoryList);
+//   System.out.println(output);
+//}
+//
+////Manage categories accounts (add,view,delete)
+//ArrayList<Categories> categoryList = new ArrayList<Categories>();
+//
+// while (optionCat != OPTION_QUIT) {
+//
+//    C206_CaseStudy.Categorymenu();
+//     int optionCat = Helper.readInt("Enter an option > ");
+//
+//    if (optionCat == OPTION_ADD ) {
+//      // Add a new item
+//      C206_CaseStudy.setHeader("ADD");
+//        // Add student
+//        Categories category = inputCategories();
+//        C206_CaseStudy.addCategory(categoryList, category);
+//        System.out.println("Category added");
+//     
+//
+//    } else if (optionCat == OPTION_VIEW) {
+//      // View all categories
+//      C206_CaseStudy.viewAllCategory(categoryList);
+//
+//    } else if (optionCat == OPTION_DELETE ) {
+//      // Delete category
+//      C206_CaseStudy.setHeader("DELETE");      
+//      // Delete category
+//      C206_CaseStudy.deleteAllCategory(categoryList);
+//
+//    } else if (optionCat == OPTION_QUIT) {
+//      System.out.println("Bye!");
+//      
+//    } else {
+//      System.out.println("Invalid option");
+//    }
+//  }
+// }
+// }
+//
