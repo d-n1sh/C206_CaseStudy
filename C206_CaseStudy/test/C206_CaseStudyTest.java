@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+
 	
 	//Done By Jia Xin
 	// student
@@ -14,8 +15,14 @@ public class C206_CaseStudyTest {
 	private Student s2;
 	private Student s3;
 
+	//Categories
+	private Categories c1;
+	private Categories c2;
+	
+
 	//student
 	private ArrayList<Student> studentList;
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -84,11 +91,5 @@ public class C206_CaseStudyTest {
 	s1 = null;
 	studentList = null;
 	}
-
-	@Test
-	public void c206_test() {
-		
-		
-	}
-
 }
+
