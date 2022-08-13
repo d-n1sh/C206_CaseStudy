@@ -20,7 +20,7 @@ public class C206_CaseStudy {
 	      return Category;
 	       
 	     }
-	  public static void addParent(ArrayList<Categories> categoryList, Categories Category) {
+	  public static void addCategory(ArrayList<Categories> categoryList, Categories Category) {
 	       
 	       categoryList.add(Category);
 	     }
@@ -62,7 +62,7 @@ public class C206_CaseStudy {
 	         C206_CaseStudy.setHeader("ADD");
 	           // Add student
 	           Categories category = inputCategories();
-	           C206_CaseStudy.addParent(categoryList, category);
+	           C206_CaseStudy.addCategory(categoryList, category);
 	           System.out.println("Category added");
 	        
 
