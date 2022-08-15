@@ -9,10 +9,6 @@
  * Date/Time created: Friday 12-08-2022 18:44
  */
 
-/**
- * @author 21011275
- *
- */
 public class Categories {
 	 private String catName;
 
